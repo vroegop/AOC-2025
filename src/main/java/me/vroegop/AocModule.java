@@ -1,0 +1,38 @@
+package me.vroegop;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.multibindings.MapBinder;
+import me.vroegop.core.DaySolver;
+import me.vroegop.core.InputLoader;
+import me.vroegop.core.ResourceInputLoader;
+import me.vroegop.puzzles.Day01Solver;
+import me.vroegop.puzzles.Day02Solver;
+import me.vroegop.puzzles.Day03Solver;
+import me.vroegop.puzzles.Day04Solver;
+
+import java.util.List;
+
+public class AocModule extends AbstractModule {
+
+    private static final List<DaySolver> SOLVERS = List.of(
+            new Day01Solver(),
+            new Day02Solver(),
+            new Day03Solver(),
+            new Day04Solver()
+    );
+
+    @Override
+    protected void configure() {
+        // Input loader
+        bind(InputLoader.class).to(ResourceInputLoader.class);
+
+        // Bind all solvers for this year
+        MapBinder<Integer, DaySolver> dayBinder = MapBinder.newMapBinder(binder(), Integer.class, DaySolver.class);
+
+        SOLVERS.forEach(solver -> dayBinder.addBinding(solver.day()).toInstance(solver));
+    }
+
+    public int amountOfSolvers() {
+        return SOLVERS.size();
+    }
+}
