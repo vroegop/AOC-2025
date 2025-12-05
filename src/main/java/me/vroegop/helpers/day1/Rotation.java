@@ -7,4 +7,8 @@ public record Rotation(boolean toRight, int value) {
             Integer.parseInt(input.substring(1))
         );
     }
+
+    public int getValue() {
+        return toRight ? value : -value;
+    }
 }

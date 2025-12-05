@@ -14,20 +14,19 @@ public class Day01Solver implements DaySolver<Integer> {
 
     @Override
     public Integer solvePart1(List<String> input) {
-        List<Rotation> rotations = input.stream()
+        List<Integer> rotations = input.stream()
                 .filter(s -> !s.isBlank())
                 .map(Rotation::new)
+                .map(Rotation::getValue)
                 .toList();
 
         int rotationValue = 50;
         int setToZeroTimes = 0;
 
-        for (Rotation rotation : rotations) {
-            rotationValue += rotation.toRight() ? rotation.value() : -rotation.value();
-            if (rotationValue % 100 == 0) {
-                setToZeroTimes++;
-            }
+        for (Integer rotation : rotations) {
+            rotationValue += rotation;
             rotationValue %= 100;
+            if (rotationValue == 0) setToZeroTimes++;
         }
 
         return setToZeroTimes;
@@ -46,10 +45,8 @@ public class Day01Solver implements DaySolver<Integer> {
         for (Rotation rotation : rotations) {
             for (int i = 0; i < rotation.value(); i++) {
                 rotationValue += rotation.toRight() ? 1 : -1;
-                if (rotationValue % 100 == 0) {
-                    setToZeroTimes++;
-                }
                 rotationValue %= 100;
+                if (rotationValue == 0) setToZeroTimes++;
             }
         }
 

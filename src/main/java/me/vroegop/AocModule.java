@@ -5,10 +5,7 @@ import com.google.inject.multibindings.MapBinder;
 import me.vroegop.core.DaySolver;
 import me.vroegop.core.InputLoader;
 import me.vroegop.core.ResourceInputLoader;
-import me.vroegop.puzzles.Day01Solver;
-import me.vroegop.puzzles.Day02Solver;
-import me.vroegop.puzzles.Day03Solver;
-import me.vroegop.puzzles.Day04Solver;
+import me.vroegop.puzzles.*;
 
 import java.util.List;
 
@@ -18,7 +15,8 @@ public class AocModule extends AbstractModule {
             new Day01Solver(),
             new Day02Solver(),
             new Day03Solver(),
-            new Day04Solver()
+            new Day04Solver(),
+            new Day05Solver()
     );
 
     @Override
