@@ -3,6 +3,8 @@ package me.vroegop;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -10,14 +12,15 @@ public class Main {
         Injector injector = Guice.createInjector(aocModule);
         PuzzleRunner runner = injector.getInstance(PuzzleRunner.class);
 
-        if (args.length < 2) {
-            System.err.println("Usage: java -jar aoc.jar <day> <part>");
-            System.err.println("Example: java -jar aoc.jar 1 2");
-            System.err.println("Now running all puzzles");
+        if (args.length < 1) {
             runner.run();
         } else {
-            int day = Integer.parseInt(args[0]);
-            int part = Integer.parseInt(args[1]);
+            // ask user for two integer inputs
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Day: ");
+            int day = sc.nextInt();
+            System.out.print("Part: ");
+            int part = sc.nextInt();
 
             runner.run(day, part);
         }
