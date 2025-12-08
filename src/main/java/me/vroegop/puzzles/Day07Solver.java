@@ -47,7 +47,6 @@ public class Day07Solver implements DaySolver<Long> {
         List<List<String>> solution = new ArrayList<>(input).stream()
                 .map(s -> Arrays.stream(s.split("")).map(s2 -> s2.equals(".") ? "0" : s2).collect(Collectors.toList()))
                 .collect(Collectors.toList());
-        Long timelines = 0L;
 
         for (int i = 0; i < solution.size(); i++) {
             if (i < solution.size() - 1) {
@@ -55,12 +54,10 @@ public class Day07Solver implements DaySolver<Long> {
                 List<String> next = solution.get(i + 1);
 
                 for (int j = 0; j < row.size(); j++) {
-                    if (row.get(j).equals("S") && next.get(j).equals("0")) {
+                    if (row.get(j).equals("S")) {
                         next.set(j, "1");
                     }
-                    if (row.get(j).matches("\\d+") && next.get(j).equals("0")) {
-                        next.set(j, row.get(j));
-                    } else if (row.get(j).matches("\\d+") && next.get(j).matches("\\d+")) {
+                    if (row.get(j).matches("\\d+") && next.get(j).matches("\\d+")) {
                         Long value = Long.parseLong(row.get(j)) + Long.parseLong(next.get(j));
                         next.set(j, String.valueOf(value));
                     }
@@ -76,6 +73,30 @@ public class Day07Solver implements DaySolver<Long> {
         }
 
         List<String> printableSolution = solution.stream().map(l -> String.join(" ", l)).toList();
+
+        /**
+         * This is what the example tree looks like with this code:
+         *
+         * 0 = "0 0 0 0 0 0 0 S 0 0 0 0 0 0 0"
+         * 1 = "0 0 0 0 0 0 0 1 0 0 0 0 0 0 0"
+         * 2 = "0 0 0 0 0 0 1 ^ 1 0 0 0 0 0 0"
+         * 3 = "0 0 0 0 0 0 1 0 1 0 0 0 0 0 0"
+         * 4 = "0 0 0 0 0 1 ^ 2 ^ 1 0 0 0 0 0"
+         * 5 = "0 0 0 0 0 1 0 2 0 1 0 0 0 0 0"
+         * 6 = "0 0 0 0 1 ^ 3 ^ 3 ^ 1 0 0 0 0"
+         * 7 = "0 0 0 0 1 0 3 0 3 0 1 0 0 0 0"
+         * 8 = "0 0 0 1 ^ 4 ^ 3 3 1 ^ 1 0 0 0"
+         * 9 = "0 0 0 1 0 4 0 3 3 1 0 1 0 0 0"
+         * 10 = "0 0 1 ^ 5 ^ 4 3 4 ^ 2 ^ 1 0 0"
+         * 11 = "0 0 1 0 5 0 4 3 4 0 2 0 1 0 0"
+         * 12 = "0 1 ^ 1 5 4 ^ 7 4 0 2 1 ^ 1 0"
+         * 13 = "0 1 0 1 5 4 0 7 4 0 2 1 0 1 0"
+         * 14 = "1 ^ 2 ^ 10 ^ 11 ^ 11 ^ 2 1 1 ^ 1"
+         * 15 = "1 0 2 0 10 0 11 0 11 0 2 1 1 0 1"
+         *
+         * Every split inserts the current value left and right below it, adding the previous value to it
+         * Every time the number can go straight down, it adds itself to the number below it
+         */
 
         return solution.get(solution.size() - 1).stream().mapToLong(v -> Long.parseLong(v.matches("\\d+") ? v : "0")).sum();
     }
