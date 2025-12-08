@@ -7,12 +7,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Day02Solver implements DaySolver<Long> {
-
-    @Override
-    public int day() {
-        return 2;
-    }
-
     @Override
     public Long solvePart1(List<String> input) {
         Long answer = input.stream()

@@ -2,16 +2,12 @@ package me.vroegop.puzzles;
 
 import me.vroegop.core.DaySolver;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Day04Solver implements DaySolver<Long> {
-
-    @Override
-    public int day() {
-        return 4;
-    }
-
     @Override
     public Long solvePart1(List<String> input) {
         List<List<String>> grid = input.stream()

@@ -9,12 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Day05Solver implements DaySolver<Long> {
-
-    @Override
-    public int day() {
-        return 5;
-    }
-
     @Override
     public Long solvePart1(List<String> input) {
         List<Long> ids = new ArrayList<>();

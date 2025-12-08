@@ -16,7 +16,8 @@ public class AocModule extends AbstractModule {
             new Day02Solver(),
             new Day03Solver(),
             new Day04Solver(),
-            new Day05Solver()
+            new Day05Solver(),
+            new Day06Solver()
     );
 
     @Override
@@ -27,10 +28,8 @@ public class AocModule extends AbstractModule {
         // Bind all solvers for this year
         MapBinder<Integer, DaySolver> dayBinder = MapBinder.newMapBinder(binder(), Integer.class, DaySolver.class);
 
-        SOLVERS.forEach(solver -> dayBinder.addBinding(solver.day()).toInstance(solver));
-    }
-
-    public int amountOfSolvers() {
-        return SOLVERS.size();
+        for (int i = 0; i < SOLVERS.size(); i++) {
+            dayBinder.addBinding(i + 1).toInstance(SOLVERS.get(i));
+        }
     }
 }

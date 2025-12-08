@@ -16,8 +16,8 @@ public class Main {
             System.err.println("Now running all puzzles");
             runner.run();
         } else {
-            int day = Integer.parseInt(args[1]);
-            int part = Integer.parseInt(args[2]);
+            int day = Integer.parseInt(args[0]);
+            int part = Integer.parseInt(args[1]);
 
             runner.run(day, part);
         }

@@ -9,12 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Day03Solver implements DaySolver<Long> {
-
-    @Override
-    public int day() {
-        return 3;
-    }
-
     @Override
     public Long solvePart1(List<String> input) {
         long answer = input.stream()
