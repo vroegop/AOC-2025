@@ -18,7 +18,8 @@ public class AocModule extends AbstractModule {
             new Day04Solver(),
             new Day05Solver(),
             new Day06Solver(),
-            new Day07Solver()
+            new Day07Solver(),
+            new Day08Solver()
     );
 
     @Override
